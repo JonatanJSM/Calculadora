@@ -4,9 +4,9 @@
 #define finca '\0'
 
 int prioridad(char simbol); // Primera funcion, para saber la prioridad 
-void expreposfija(char infi[], int longitud, int pili[], char exprepos[]); //FunciÛn para convertir la expresiÛn infija a posfija
-int valorar(char simp, char opera[]);//FunciÛn para verificar dÛnde est·n los operadores en la cadena
-float resultado(char posf[], int longi); //FunciÛn para resolver la  funciÛn estando en posfija
+void expreposfija(char infi[], int longitud, int pili[], char exprepos[]); //Funci√≥n para convertir la expresi√≥n infija a posfija
+int valorar(char simp, char opera[]);//Funci√≥n para verificar d√≥nde est√°n los operadores en la cadena
+float resultado(char posf[], int longi); //Funci√≥n para resolver la  funci√≥n estando en posfija
 
 
 int main() {
@@ -14,20 +14,20 @@ int main() {
 	int pila[20]; char posfija[20];
 	float r;
 	
-	printf("Ingresa la expresiÛn simple:"); //Se ingresa la expresiÛn aritmÈtica
+	printf("Ingresa la expresi√≥n simple:"); //Se ingresa la expresi√≥n aritm√©tica
 	gets(infija);
 	
-	tam = strlen(infija);  //Se busca la longitud de la expresiÛn ingresada 
+	tam = strlen(infija);  //Se busca la longitud de la expresi√≥n ingresada 
 	
-	expreposfija(infija, tam, pila, posfija); //FunciÛn para convertir la expresiÛn infija a posfija
+	expreposfija(infija, tam, pila, posfija); //Funci√≥n para convertir la expresi√≥n infija a posfija
 	
-	r=resultado(posfija,tam);   //FunciÛn para resolver la expresiÛn aritmÈtica ingresada mediante la posfija
+	r=resultado(posfija,tam);   //Funci√≥n para resolver la expresi√≥n aritm√©tica ingresada mediante la posfija
 	
 	printf("\n El resultado es: %.2f", r);
 	
 }
 
-int valorar(char simp, char opera[]){  //FunciÛn para encontrar los operadores en la cadena
+int valorar(char simp, char opera[]){  //Funci√≥n para encontrar los operadores en la cadena
 	int v = 2; int j;
 	for(j=0;j<6;j++){
 		if(simp == opera[j]){
@@ -37,9 +37,7 @@ int valorar(char simp, char opera[]){  //FunciÛn para encontrar los operadores e
 	return v;
 }
 	
-	
-	
-int prioridad(char simbol){  //FunciÛn para saber la prioridad de los operadores
+int prioridad(char simbol){  //Funci√≥n para saber la prioridad de los operadores
 	int pri = 0;
 	
 	if(simbol =='(' || ')'){            
@@ -57,8 +55,7 @@ int prioridad(char simbol){  //FunciÛn para saber la prioridad de los operadores
 	return pri;
 }
 	
-
-void expreposfija(char infi[], int longitud, int pili[], char exprepos[]){  //FunciÛn para pasar a posfijo
+void expreposfija(char infi[], int longitud, int pili[], char exprepos[]){  //Funci√≥n para pasar a posfijo
 	char operadores[6] = {'+','-','/','*','(',')'};
 	char auxsimbo; 
 	int priori;
@@ -72,7 +69,6 @@ void expreposfija(char infi[], int longitud, int pili[], char exprepos[]){  //Fu
 		auxsimbo = infi[i];
 		v = valorar(auxsimbo,operadores);
 		
-		
 		if(v == 1){
 			if(auxsimbo == '('){   
 				pili[j] = auxsimbo;
@@ -85,7 +81,7 @@ void expreposfija(char infi[], int longitud, int pili[], char exprepos[]){  //Fu
 					k++;
 					j--;
 				}
-				j--; //Para dejar a la j en 0, y asÌ llenar la pila desde 0				
+				j--; //Para dejar a la j en 0, y as√≠ llenar la pila desde 0				
 			}
 			
 			else {
@@ -114,8 +110,7 @@ void expreposfija(char infi[], int longitud, int pili[], char exprepos[]){  //Fu
 		
 	}
 	
-	
-	//Cuando termina el ciclo for, puede que quede algo en la pila, en el caso de ser asÌ, lo sacamos con este ciclo
+	//Cuando termina el ciclo for, puede que quede algo en la pila, en el caso de ser as√≠, lo sacamos con este ciclo
 	while(j>=0){
 		exprepos[k] = pili[j-1];
 		k++;
@@ -123,8 +118,7 @@ void expreposfija(char infi[], int longitud, int pili[], char exprepos[]){  //Fu
 	}
 	exprepos[k-1]=finca; 
 	
-	
-	printf("La expresiÛn en notacion posfija es; \n");  //ImpresiÛn de la expresiÛn posfija
+	printf("La expresi√≥n en notacion posfija es; \n");  //Impresi√≥n de la expresi√≥n posfija
 	
 		for(i=0; i<k; i++){
 			printf("%c", exprepos[i]);
@@ -144,10 +138,10 @@ float resultado(char posf[],int longi){
 	
 	for (i=0; i<longi; i++){
 		aux = posf[i];
-		v = valorar(aux,operadores);   //Verificar los operadores que se encuentran en la expresiÛn posfija
+		v = valorar(aux,operadores);   //Verificar los operadores que se encuentran en la expresi√≥n posfija
 		if(v==1){
-			if (aux=='+') {         //Resolver la expresiÛn dependiendo de los operadores que se encuentren
-				result = (float)pilaaux[k-2] + (float)pilaaux[k-1];  //Se van sacando los valores guardados en la pila del ˙ltimo al primero ingresado
+			if (aux=='+') {         //Resolver la expresi√≥n dependiendo de los operadores que se encuentren
+				result = (float)pilaaux[k-2] + (float)pilaaux[k-1];  //Se van sacando los valores guardados en la pila del √∫ltimo al primero ingresado
 				pilaaux[k-2]= result;  //Se guarda el nuevo resultado en la pila 
 				k--;
 			}
@@ -171,7 +165,7 @@ float resultado(char posf[],int longi){
 			
 		}
 		
-		else{          //Pila para agrupar los n˙meros 
+		else{          //Pila para agrupar los n√∫meros 
 			b[0] = aux;
 			baux = atof(b);
 			pilaaux[k] = baux;
@@ -184,9 +178,3 @@ float resultado(char posf[],int longi){
 	
 	return result; 
 }
-
-	
-	
-	
-	
-
